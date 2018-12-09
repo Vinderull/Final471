@@ -344,6 +344,9 @@ void ArducamSSD1306::ssd1306_data(uint8_t c) {
 
 
 void ArducamSSD1306::display(void) {
+
+  unsigned char buffer1[10];
+
   ssd1306_command(SSD1306_COLUMNADDR);
   ssd1306_command(0);   // Column start address (0 = reset)
   ssd1306_command(SSD1306_LCDWIDTH-1); // Column end address (127 = reset)
@@ -365,11 +368,36 @@ void ArducamSSD1306::display(void) {
     //Serial.println(TWBR, DEC);
     //Serial.println(TWSR & 0x3, DEC);
 
+
+    fd = open("/dev/i2c-1", O_RDWR);
+
+    /*error checking */
+      if(fd<0){
+          fprintf(stderr, "Error opening file! %s\n",
+                              strerror(errno));
+          exit(0);
+      }
+
+
+    /* Set slave address */
+
+      result=ioctl(fd, I2C_SLAVE, 0x29);
+
+  /*error checking */
+      if(result<0){
+          fprintf(stderr, "Error setting i2c address! %s\n",
+                              strerror(errno));
+          exit(0);
+      }
+
     // I2C
     for (uint16_t i=0; i<(SSD1306_LCDWIDTH*SSD1306_LCDHEIGHT/8); i++) {
-      // send a bunch of data in one xmission
-      Wire.beginTransmission(_i2caddr);
-      WIRE_WRITE(0x40);
+
+
+      buffer1[0] = 0x40;
+      result = write(fd, buffer1, 1);
+
+      result = write(fd, buffer, 16);
       for (uint8_t x=0; x<16; x++) {
      WIRE_WRITE(buffer[i]);
   i++;
