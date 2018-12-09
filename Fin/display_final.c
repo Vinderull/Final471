@@ -109,11 +109,8 @@ enable(fd);
 
 
 
-
-
-
+  /*get chan1 value */
 	buffer[0] = TSL2591_COMMAND_BIT | TSL2591_REGISTER_CHAN1_LOW;
-
 	result = write(fd,buffer,1);
 
 	/*error checking */
@@ -123,8 +120,14 @@ enable(fd);
 					 exit(0);
 					}
 
+
 	 /*read chan 0 */
-	 read(fd, &returnVal, 2);
+	 result = read(fd, &returnVal, 2);
+
+	 if(result < 0){
+			 fprintf(stderr, "error reading after issuing command! %s\n");
+		 exit(0);
+		 }
 
 	 /*get chan 1 lux val */
 	 sensorLuxb = returnVal;
@@ -199,6 +202,13 @@ float luxCalc(int ch0, int ch1)
 {
 	float conFactor, lux;
 	//time * gain / Dispersion factor
+
+	// Check if value is saturated
+if ((ch0 == 0xFFFF) | (ch1 == 0xFFFF))
+{
+	/* return 0 if saturated */
+	return 0;
+}
 
 	conFactor = (100.0 * 1.0) / TSL2591_LUX_DF;
 
