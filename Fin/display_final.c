@@ -76,6 +76,9 @@ disable(fd);
 /*Infinite loop to alternate ECE and 471 on display */
 while(1){
 
+sensorLuxa = 0;
+sensorLuxb = 0;
+returnVal = 0;
 enable(fd);
 
 
@@ -104,7 +107,7 @@ enable(fd);
 		exit(0);
  	}
 	/*sensor val */
-	printf("sensorluxa is %d\n\r", returnVal);
+	//printf("sensorluxa is %d\n\r", returnVal);
 	sensorLuxa |= returnVal;
 
 
@@ -142,9 +145,9 @@ enable(fd);
 	ir = (sensorLuxb >> 16);
 	visible = fullSpec - ir;
 
-	printf("Visble light = %d and IR = %d \n\r", visible, ir);
-	printf("The Lux value is %f\n\r", luxCalc(fullSpec, ir));
-
+	printf("Visble light = %d and IR = %d\n", visible, ir);
+	printf("The Lux value is %f\n", luxCalc(fullSpec, ir));
+	printf("\n");
 					/*wait 1 second in usec */
 					usleep(1000000);
 }
@@ -165,7 +168,7 @@ void enable(int fd)
 
 		buffer[0] = TSL2591_COMMAND_BIT | TSL2591_REGISTER_ENABLE;
 		buffer[1] = TSL2591_ENABLE_POWERON | TSL2591_ENABLE_AEN | TSL2591_ENABLE_AIEN;
-	 printf("Command bit being written out %#08X \r\n", buffer[0]);
+	 //printf("Command bit being written out %#08X \r\n", buffer[0]);
 	 // buffer[0] = 0x00;
 	result = write(fd,buffer,2);
 
