@@ -1,22 +1,6 @@
-ECE471 HW5 -- Fall 2018
+ECE471 && ECE435 Final project
 
-Name:Ryan Dufour
-
-
-7.	Describe what your "something cool" code does
-	I have included the decoded I2C message using the Analog Discovery 2 analog scope and digital channel functions.
-	The captured event is for the "ECE" write.
-	The displayed on scope matches up with the hex values I am writing in the C code.
-8.
- a). The GPU handles the initial boot on a raspberry Pi. This is actually quite odd, and isn't incredibly common for even non ARM systems.
- b). The boot partition is FAT32 because it is an extremely simple filesystem. When the system is first booted, most peripherals
-     are not yet enabled, so having an incredibly complex filesystem to start would not be ideal.
- c). The boot loader is tasked with loading the operating system.
- d). As outlined by the I2C standard, 0x00-0x02 and 0x78-0x7F  are reserved addresses
-
-9.
- a). 149 lines
- b). 61 lines
+Ryan Dufour && Phil Robb
 
 
-
+This is repo for the bluetooth light sensor project using a TSL2591 and two raspberry Pi 3B's
