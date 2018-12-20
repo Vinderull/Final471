@@ -220,7 +220,7 @@ if ((ch0 == 0xFFFF) | (ch1 == 0xFFFF))
 	conFactor = (100.0 * 1.0) / TSL2591_LUX_DF;
 
 	//lux calculation
-	/*from data sheet and arduino tutorial *?
+	/*from data sheet and arduino tutorial */
 	lux = ( ((float)ch0 - (float)ch1 )) * (1.0 - ((float)ch1/(float)ch0) ) / conFactor;
 
 	return lux;

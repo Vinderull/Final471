@@ -23,4 +23,4 @@ submit:	final.c Makefile rfcomm-client.py rfcomm-server.py TSLHeader.h
 
 
 clean:
-	rm -f *~ *.o display_final
+	rm -f *~ *.o final
