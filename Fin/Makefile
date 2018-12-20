@@ -19,7 +19,7 @@ display_final.o:	final.c
 ###
 
 submit:	final.c Makefile rfcomm-client.py rfcomm-server.py TSLHeader.h
-	tar -czvf hw5_submit.tar.gz final.c Makefile rfcomm-client.py rfcomm-server.py TSLHeader.h
+	tar -czvf final_project.tar.gz final.c Makefile rfcomm-client.py rfcomm-server.py TSLHeader.h
 
 
 clean:
