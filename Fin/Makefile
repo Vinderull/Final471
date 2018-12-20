@@ -3,23 +3,23 @@ CFLAGS = -g -O2 -Wall
 LFLAGS =
 
 
-all: display_final
+all: final
 
 
 ###
 
-display_final:	display_final.o
-	$(CC) $(LFLAGS) -o display_final display_final.o
+display_final:	final.o
+	$(CC) $(LFLAGS) -o final final.o
 
-display_final.o:	display_final.c
-	$(CC) $(CFLAGS) -c display_final.c
+display_final.o:	final.c
+	$(CC) $(CFLAGS) -c final.c
 
 
 
 ###
 
-submit:	display_final.c README Makefile
-	tar -czvf hw5_submit.tar.gz display_test.c display_final.c display_cool.c README Makefile
+submit:	final.c Makefile rfcomm-client.py rfcomm-server.py TSLHeader.h
+	tar -czvf hw5_submit.tar.gz final.c Makefile rfcomm-client.py rfcomm-server.py TSLHeader.h
 
 
 clean:
